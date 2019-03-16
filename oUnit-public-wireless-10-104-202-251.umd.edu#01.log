@@ -1,0 +1,39 @@
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:0:expr_basic.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:0:expr_basic is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:0:expr_basic.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:2:expr_fail.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:2:expr_fail is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:2:expr_fail.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:5:define_1.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:5:define_1 is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:5:define_1.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:7:assign_1.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:7:assign_1 is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:7:assign_1.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:9:assign_exp.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:9:assign_exp is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:9:assign_exp.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:11:equal.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:11:equal is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:11:equal.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:13:exp_1.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:13:exp_1 is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:13:exp_1.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:15:exp_3.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:15:exp_3 is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:15:exp_3.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:17:if_else_while.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:17:if_else_while is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:17:if_else_while.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:19:nested_ifelse.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:19:nested_ifelse is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:19:nested_ifelse.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:21:main.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:21:main is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:21:main.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:23:test_2.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:23:test_2 is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:23:test_2.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Start test public:25:stmt_fail_basic.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: Test public:25:stmt_fail_basic is successful.
+2017-07-11T17:19:33+00:00 wireless-10-104-202-251.umd.edu#01 I: End test public:25:stmt_fail_basic.
