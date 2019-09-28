@@ -73,7 +73,7 @@ These relational operators operate only on integers and produce a `Val_Bool` con
 
 These equality operators operate both on integers and booleans, but both subexpressions must be of the same type. The operators produce a `Val_Bool` containing the result of the operation. If the two expressions to perform these operations on evaluate to mismatched types (i.e. one boolean and one integer), a `TypeError` should be raised.
 
-### Part 2: eval_stmt
+### eval_stmt
 
 `eval_stmt` takes an environment `env` and a statement `s` and produces an updated `eval_environment` as a result. This environment is represented as `a` in the formal semantics, but will be referred to as the environment in this document.
 
