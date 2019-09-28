@@ -1,78 +1,37 @@
-# Project 4B: SmallC Interpreter
-CMSC 330, Summer 2017
-Due July 11th, 2017
+mallC Interpreter
 
-Ground Rules and Extra Info
----------------------------
-This is **NOT** a pair project. You must work on this project alone as with most other CS projects. 
-See the Academic Integrity section for more information.
-
-In your code, you may use any non-imperative standard library functions (with the exception of printing), but the ones that will be useful to you will be found in the [`Pervasives` module][pervasives doc] and the [`List` module][list doc]. Note that the `List` module has been disallowed in previous projects, but in the case of this project and projects going forward it will be allowed.
-
-You still may not use any imperative structures of OCaml such as references or the `Hashtbl` module.
+July 11th, 2017
 
 Introduction
 ------------
-Up to this point your exposure to OCaml has been in an effort to familiarize you with the language, and you should now have a basic understanding of OCaml's deeply integrated typing and pattern systems. It's because of these elegant constructs that OCaml has gained popularity as programming language implementation language. Many compilers classes (including CMSC430 at UMD) use OCaml. Facebook uses OCaml heavily, too, e.g., for [Hack][hack github], its PHP-based web language.
-
-In this project, you will implement a small subset of an interpreter and typechecker for SmallC, a small C-like language. The language supports variables, `int` and `bool` types, equality and comparison operations, math and boolean operations, control flow, and printing, all while maintaining static type-safety and being Turing complete!
+Implementing a small subset of an interpreter and typechecker for SmallC, a small C-like language. The language supports variables, `int` and `bool` types, equality and comparison operations, math and boolean operations, control flow, and printing, all while maintaining static type-safety and being Turing complete!
 
 The language consists of expressions from the `expr` type and statements from the `stmt` type. These algebraic types can be used to represent the full space of properly formed SmallC programs. Their definitions are found in the `types.ml` file. This file should be a constant reference to the data types involved in successfully working with SmallC.
 
-Project Files
+Files
 -------------
-To begin this project, you will need to commit any uncommitted changes to your local branch and pull updates from the git repository. [Click here for directions on working with the Git repository.][git instructions] The following are the relevant files:
-
 -  OCaml Files
-  - **eval.ml**: All of your code will all be written in the file `eval.ml`. _None of the files other than this one should be changed._
+  - **eval.ml**
   - **eval.mli**: This is the _interface_ for `eval.ml`. It defines what types and functions are visible to modules outside of `eval.ml` (such as `smallc.ml`, listed below).
-  - **studentTests.ml**: You aren't required to use this file, but you may use it to add your own tests to the project. We've included some small notes on writing OUnit tests and our test utilities for this project, which we discuss below if you're interested in this method of testing.
-  - **lexer.cm[oi]** and **parser.cm[oi]**: These precompiled object and interface files contain the lexer and parser used for turning plain files into OCaml datatypes. They are precompiled because you have to implement them as part of the project 4A.  You can also use your own  lexer and parser you implemeted for Project 4A.
-  
-  - **public.ml** and **public_inputs/**: The public test driver file and the SmallC input files to go with it, respectively.
-  - **smallc.ml**: A frontend to your interpreter used to build the `smallc` executable target. This is explained in more detail below.
-  - **types.ml**: This file contains all type definitions used in this project.
-  - **utils.ml** and **testUtils.ml**: These files contain functions that we have written for you and for us that aid in testing and debugging. The small part of **utils.ml** that concerns you in implementing this project is called out very explicitly when it is needed later in the document, and otherwise you should not need to look at either of these files.
+  - **lexer.cm[oi]** and **parser.cm[oi]**: These precompiled object and interface files contain the lexer and parser used for turning plain files into OCaml datatypes. 
+  - **smallc.ml**: A frontend to interpreter used to build the `smallc` executable target.
+  - **types.ml**: This file contains all type definitions.
+  - **utils.ml** and **testUtils.ml**: These files contain functions for testing and debugging. The small part of **utils.ml** that concerns the implementing is called out very explicitly when it is needed later in the document.
 - Submission Scripts and Other Files
-  - **submit.rb**: Execute this script to submit your project to the submit server.
-  - **submit.jar** and **.submit**: Don't worry about these files, but make sure you have them.
-  - **Makefile**: This is used to build the public tests by simply running the command `make`, just as in 216.
+  - **Makefile**: This is used to build the public tests by simply running the command `make`.
 
 Compilation, Tests, and Running
 -------------------------------
 In order to compile your project, simply run the `make` command and our `Makefile` will handle the compilation process for you, just as in 216. After compiling your code, three executable files will be created:
 - public
 - smallc
-- student
 
 The public tests can be run by simply running `public` (i.e. `./public` in the terminal; think of this just like with a.out in C).
 
-You can run the SmallC interpreter directly on a SmallC program by running `./smallc <filename>`. This driver, provided by us, reads in a program from a file and evaluates the code, outputing the results of any print statements present in the source file. Think of this command a lot like the `ruby` command, but instead of running the ruby interpreter, it runs the SmallC interpreter that you wrote yourself!
-
-If you would like more detailed information about what your code produced, running `./smallc <filename> -R` provides a report on the resultant variable bindings as reported by your evaluator. If you would like to see data structure that is being generated by the parser and being fed into your interpreter, run `./smallc <filename> -U` and our `Utils` module will translate the data structure into a string and print it out for you - this part does not require any of your code, so feel free to try it on the public tests before you even start! Use the `smallc` executable to your advantage when testing; that's why we're providing it! Note that you don't need to touch `smallc.ml` yourself, as it only functions as an entry point for the interpreter and is independent of your implementation.
-
-The `studentTests.ml` file compiles into the `student` binary, which behaves just like the `public` binary except serves as a dedicated space for you to write your own test cases. We offer a few small notes on how to do this, however full information on OUnit can be found online and our testing tools can be seen in full use in the `public.ml` test cases, and then emulated. You are **NOT** required to use this file at all, and if you don't touch it, it won't affect your code at all. If you want more information about writing student tests within our framework, post on Piazza.
-
-In order to compile against the provided parser and lexer, you must be on OCaml version 4.04.0.
-
 The Evaluator
 -------------
-*The evaluator must be implemented in `eval.ml` in accordance with the signatures for `eval_expr` and `eval_stmt` found in `eval.mli`. `eval.ml` is the only file you will write code in. The functions should be left in the order they are provided, as a good implementation of `eval_stmt` will rely on `eval_expr`.*
 
-The heart of SmallC is your evaluator. We have already implemented `Lexer` and `Parser` modules that deal with constructing tokens and creating the AST out of a program. Where your code picks up is with a representation of SmallC programs as OCaml datatypes, which you are then responsible for evaluating according the rules below. A program is made up of a series of statements and expressions:
-
-- Statements represent the structure of a program - declarations, assignments, control flow, and prints in the case of SmallC. - Expressions represent operations on data - variable lookups, mathematical and boolean operations, and comparison. Expressions can't affect the environment, and as a result only return a `value` containing the value of the expression.
-
-You are responsible for implementing two functions, `eval_expr` and `eval_stmt` in that order. Each of these takes as an argument an `environment` (given in `types.ml`) that is a map from a variable to its current value. Statements may change the values of variables, so `eval_stmt` returns a possibly updated environment.
-
-A formal operational semantics of SmallC can be found in [`semantics.pdf`][semantics document]. We highly recommend you read this document as you work to clear up any possible ambiguity introduced by the English explanations below. The formal semantics do not, however, define error cases such as addition between a boolean and an integer and therefore represent a stuck reduction. The expected behavior for these irreducable error cases are defined only in this document and can be boiled down to the following rules:
-- Any expression containing division by zero should raise a DivByZero error when evaluated.
-- Any expression or statement that is applied to the wrong types should raise a `TypeError` exception when evaluated, for example, the expression `1 + true` would result in `TypeError`.
-- An expression or statement that redefines an already defined variable, assigns to an undefined variable, or reads from an undefined variable should raise a `DeclarationError` when evaluated.
-
-We do not enforce what messages you use when raising the `TypeError` or `DeclarationError` exceptions; that's up to you. Evaluation of subexpressions should be done from left to right, as specified by the semantics, in order to ensure that lines with multiple possible errors match up with our expected errors.
-
-### Part 1: eval_expr
+### eval_expr
 
 `eval_expr` takes an environment `env` and an expression `e` and produces the result of _evaluating_ `e`, which is something of type `value` (`Val_Int` or `Val_Bool`).
 
@@ -146,34 +105,7 @@ The while statement consists of two components - a guard expression and a body s
 
 #### Print
 
-The print statement is your project's access to standard output. First, the expression to `print` should be evaluated. Print supports both integers and booleans. Integers should print in their natural forms (i.e. printing `Val_Int(10)` should print "10". Booleans should print in plaintext (i.e. printing `Val_Bool(true)` should print "true" and likewise for "false"). Whatever is printed should always be followed by a newline.
-
-**VERY IMPORTANT NOTE ON PRINTING**: If you attempt to print with `print_string`, `print_int`, etc... you will fail any test that checks your output. This is because we do not directly intercept your output, but rather have implemented some wrapper functions in the `Utils` for program printing (do not remove `open Utils` from the top of `eval.ml`!). As a result, your code may have any amount of `print_string` statements and it **WILL NOT** affect the tests. Only printing performed through the following wrapper functions will be evaluated by the test system, and as a result should be used exclusively with `Print`. The supplied print wrappers which you *must use in place of the built-in print functions for any and all output resulting from `Print` statements and for nothing else* are as follows:
-- `print_output_string : string -> unit`
-- `print_output_int : int -> unit`
-- `print_output_bool : bool -> unit`
-- `print_output_newline : unit -> unit`
-Again, you may use the normal prints defined in the standard library `Pervasives` module, but they will not affect your test grading in any way.
-
-Project Submission
-------------------
-You should submit the file `eval.ml` containing your solution. You may submit other files, but they will be ignored during grading. We will run your solution as individual OUnit tests just as in the provided public test file.
-
-Be sure to follow the project description exactly! Your solution will be graded automatically, so any deviation from the specification will result in lost points.
-
-You can submit your project in two ways:
-- Submit your files directly to the [submit server][submit server] as a zip file by clicking on the submit link in the column "web submission".
-![Where to find the web submission link][web submit link]  
-Then, use the submit dialog to submit your zip file containing `eval.ml` directly.
-![Where to upload the file][web upload example]  
-Select your file using the "Browse" button, then press the "Submit project!" button. You will need to put it in a zip file since there are two component files.
-- Submit directly by executing a the submission script on a computer with Java and network access. Included in this project are the submission scripts and related files listed under **Project Files**. These files should be in the directory containing your project. From there you can either execute submit.rb or run the command `java -jar submit.jar` directly (this is all submit.rb does).
-
-No matter how you choose to submit your project, make sure that your submission is received by checking the [submit server][submit server] after submitting.
-
-Academic Integrity
-------------------
-Please **carefully read** the academic honesty section of the course syllabus. **Any evidence** of impermissible cooperation on projects, use of disallowed materials or resources, or unauthorized use of computer accounts, **will be** submitted to the Student Honor Council, which could result in an XF for the course, or suspension or expulsion from the University. Be sure you understand what you are and what you are not permitted to do in regards to academic integrity when it comes to project assignments. These policies apply to all students, and the Student Honor Council does not consider lack of knowledge of the policies to be a defense for violating them. Full information is found in the course syllabus, which you should review before starting.
+The print statement is access to standard output. First, the expression to `print` should be evaluated. Print supports both integers and booleans. Integers should print in their natural forms (i.e. printing `Val_Int(10)` should print "10". Booleans should print in plaintext (i.e. printing `Val_Bool(true)` should print "true" and likewise for "false"). Whatever is printed should always be followed by a newline.
 
 <!-- Link References -->
 [list doc]: https://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
