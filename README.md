@@ -1,4 +1,4 @@
-mallC Interpreter
+#SmallC Interpreter
 
 July 11th, 2017
 
